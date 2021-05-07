@@ -309,6 +309,24 @@ imports: [
     )
 ],
  ```
+ A set of configuration options for a router module, provided in the forRoot() method:
+ ```
+ {
+  enableTracing?: boolean
+  useHash?: boolean
+  initialNavigation?: InitialNavigation
+  errorHandler?: ErrorHandler
+  preloadingStrategy?: any
+  onSameUrlNavigation?: 'reload' | 'ignore'
+  scrollPositionRestoration?: 'disabled' | 'enabled' | 'top'
+  anchorScrolling?: 'disabled' | 'enabled'
+  scrollOffset?: [number, number] | (() => [number, number])
+  paramsInheritanceStrategy?: 'emptyOnly' | 'always'
+  malformedUriErrorHandler?: (error: URIError, urlSerializer: UrlSerializer, url: string) => UrlTree
+  urlUpdateStrategy?: 'deferred' | 'eager'
+  relativeLinkResolution?: 'legacy' | 'corrected'
+}
+ ```
 
 **Usage**
 ```html
