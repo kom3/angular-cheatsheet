@@ -460,7 +460,7 @@ It accepts 'root' as a value or any module of your application
 
 ## Declare global values
 
-Either we can export variables in services and import those in class coponents wherever needed, or can use InjectionToken.
+Either we can export variables in services and import those in class components wherever needed, or can use InjectionToken.
 
 
 
