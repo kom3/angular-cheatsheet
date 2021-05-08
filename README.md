@@ -460,21 +460,49 @@ It accepts 'root' as a value or any module of your application
 
 ## Declare global values
 
+Either we can export variables in services and import those in class coponents wherever needed, or can use InjectionToken.
+
+
+
 class:
-```ts
-import {InjectionToken} from '@angular/core';
-export const CONTROLS_GLOBAL_CONFIG = new InjectionToken<ControlsConfig>('global-values');
-export interface ControlsConfig {firstGlobalValue: string;}
+
+Description:
+Use an InjectionToken whenever the type you are injecting is not reified (does not have a runtime representation) such as when injecting an interface, callable type, array or parameterized type.
+
+InjectionToken is parameterized on T which is the type of object which will be returned by the Injector. This provides additional level of type safety.
+
+
+```
+@Injectable() 
+export class MyGlobals {
+  readonly myConfigValue:string = 'abc';
+}
+
+@NgModule({
+  providers: [MyGlobals],
+  ...
+})
+
+class MyComponent {
+  constructor(private myGlobals:MyGlobals) {
+    console.log(myGlobals.myConfigValue);
+  }
+}
 ```
 
-module:
-```ts
-providers: [{provide: CONTROLS_GLOBAL_CONFIG, useValue: {firstGlobalValue : 'Some value' }},
-```
+or provide individual values
 
-usage (for example in component)
-```ts
-constructor(@Optional() @Inject(CONTROLS_GLOBAL_CONFIG) globalVlues: ControlsConfig) {
+```
+@NgModule({
+  providers: [{provide: 'myConfigValue', useValue: 'abc'}],
+  ...
+})
+
+class MyComponent {
+  constructor(@Inject('myConfigValue') private myConfigValue:string) {
+    console.log(myConfigValue);
+  }
+}
 ```
 
 # Pipes
